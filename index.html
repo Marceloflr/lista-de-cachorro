@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url("foto fundo.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid #4caf50;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #e4e4e4;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .form {
+        border: 1px solid gray;
+        padding: 10px;
+        margin: 50px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+      }
+
+      .esconder {
+        display: none;
+      }
+    </style>
+    <script>
+      var exibir = false;
+      function toggleFormulario() {}
+
+      function ocultarFormulario() {
+        var a = document.getElementById("formulario");
+        a.classList.add("esconder");
+      }
+
+      function exibirFormulario() {
+        let elemento = document.getElementById("formulario");
+        let classes = elemento.className.split(" ");
+        if (classes.length > 0) {
+          classes.pop();
+        }
+        let novaClasse = classes.join(" ");
+        elemento.className = novaClasse;
+      }
+
+      var dados = [
+        {
+          nome: "Luffy",
+          dono: "Marcelo",
+          phone: "629998999",
+          email: "marcelo@gmail.com",
+          imagem: "https://place.dog/300/200?asdasdasd1",
+        },
+        {
+          nome: "Aqua",
+          dono: "Ruby",
+          phone: "3243434232",
+          email: "ruby@gmail.com",
+          imagem: "https://place.dog/300/200?asdasdasd3",
+        },
+        {
+          nome: "Zoro",
+          dono: "Miguel",
+          phone: "6282114349",
+          email: "miguel@gmail.com",
+          imagem: "https://place.dog/300/200?asdasdasd5",
+        },
+      ];
+
+      function buscarDados() {
+        corpoDaTabela.innerHTML = "";
+
+        for (let index = 0; index < dados.length; index++) {
+          const item = dados[index];
+          var personalizado = corpoDaTabela.innerHTML;
+          inserirItemNaTabela(item, personalizado, index);
+        }
+      }
+
+      function inserirItemNaTabela(item, personalizado, index) {
+        personalizado =
+          personalizado +
+          '<tr id="linha' +
+          index +
+          '" ><td> <img src="' +
+          item["imagem"] +
+          '" />' +
+          "</td><td>" +
+          item["nome"] +
+          "</td><td>" +
+          item["dono"] +
+          "</td><td>" +
+          item["phone"] +
+          "</td><td>" +
+          item["email"] +
+          '</td><td><button onclick="editar(' +
+          index +
+          ')">editar</button><button onclick="excluir(' +
+          index +
+          ')">excluir</button></td></tr>';
+
+        corpoDaTabela.innerHTML = personalizado;
+      }
+
+      function adicionar() {
+        document.getElementById("formulario").preventde;
+        alert("adicionar");
+
+        document.getElementsByName("cachorro");
+
+        var novoCachorro = {
+          nome: document.getElementsByName("cachorro")[0].value,
+          dono: document.getElementsByName("dono")[0].value,
+          phone: document.getElementsByName("tefefone")[0].value,
+          email: document.getElementsByName("email")[0].value,
+          imagem: document.getElementsByName("imagem")[0].value,
+        };
+
+        dados.push(novoCachorro);
+
+        buscarDados();
+      }
+
+      function editar(index) {
+        alert("editar");
+        alert(index);
+      }
+
+      function excluir(index) {
+        alert("excluir");
+        dados.splice(index, 1);
+        buscarDados();
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1 id="titulo">Lista de Cachorros e Donos</h1>
+
+    <button onclick="exibirFormulario()">Adicionar um cachorro e gatos</button>
+    <br />
+    <div id="formulario" class="form class2 cllass3 abacate">
+      <label>Cachorro</label>
+      <input name="cachorro" type="text" />
+      <br />
+      <label>Dono</label>
+      <input name="dono" type="text" />
+      <br />
+      <label>Telefone</label>
+      <input class="linha1" name="tefefone" type="tel" /> <br />
+      <label>Email</label> <input name="email" type="email" /> <br />
+      <label>Imagem</label> <input name="imagem" type="text" /> <br />
+      <button onclick="adicionar()">Adicionar</button>
+      <button onclick="ocultarFormulario()">Cancelar</button>
+    </div>
+
+    <table id="tabela">
+      <thead>
+        <tr>
+          <td>Imagem</td>
+          <td>Cachorro</td>
+          <td>Dono</td>
+          <td>Telefone</td>
+          <td>Email</td>
+          <td>Ações</td>
+        </tr>
+      </thead>
+      <tbody id="corpoDaTabela"></tbody>
+    </table>
+  </body>
+</html>
